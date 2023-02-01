@@ -1,6 +1,4 @@
-package com.spring.security.clamed.requests
-
--security.clamed.requests;
+package com.spring.security.clamed.requests;
 
 import com.hackerrank.test.utility.Order;
 import com.hackerrank.test.utility.OrderedTestRunner;
