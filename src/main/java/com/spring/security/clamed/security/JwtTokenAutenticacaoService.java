@@ -35,6 +35,7 @@ public class JwtTokenAutenticacaoService{
 
     // Gerando token de autenticação e adicioando ao cabelho da reposta HTTP
     public void addAuthentication(HttpServletResponse response, String username) throws IOException {
+
         //Montagem do token
         String JWT =  Jwts.builder() // chamando o gerador de token
                 .setSubject(username) // adicionamos o usuário ao token
@@ -52,6 +53,7 @@ public class JwtTokenAutenticacaoService{
 
     //Método que retorna o usuario validado com token ou caso seja inválido retorna null
     public Authentication getAuthentication(HttpServletRequest request){
+
         // pegar o token enviado no cabeçalho http
         String token = request.getHeader(HEADER_STRING);
 
