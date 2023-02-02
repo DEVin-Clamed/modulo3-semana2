@@ -4,10 +4,14 @@ import com.spring.security.clamed.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -50,11 +54,35 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 /* Definimos que não iremos criar sessão para armazenar os dados do usuário
                  */
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                //TODO /*Filtrar as requisições de login para fazer autenticação*/
+                .and()
 
-                //TODO /* Filtrar as demais requisições para verificar a preservação do token JWT no header do HTTP */
+                /*Filtrar as requisições de login para fazer autenticação*/
+                .addFilterBefore(new JwtLoginFilter("/login", authenticationManager()),
+                        UsernamePasswordAuthenticationFilter.class)
 
+                 /* Filtrar as demais requisições para verificar a preservação do token JWT no header do HTTP */
+                .addFilterBefore(new JwtApiAutenticaoFilter(), UsernamePasswordAuthenticationFilter.class);
+
+
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // Service que irá consultar o usuário no banco de dados
+        auth.userDetailsService(usuarioService)
+
+        // definir a codificação de senha
+                .passwordEncoder(new BCryptPasswordEncoder());
+
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // configura URLs para não passar pelos filtros de segurança
+        web.ignoring().antMatchers("/**.html",
+                "/v2/api-docs",
+                "/webjars/**");
     }
 }
