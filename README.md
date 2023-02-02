@@ -18,7 +18,8 @@ Tópicos abordados em aulas anteriores foram revisados e exercitados ao longo do
 - Banco de dados:
     - elaboração do modelo lógico relacional do domínio do projeto
 
-   <img src="https://github.com/DEVin-Clamed/modulo2-semana11/blob/main/src/main/resources/doc/er_api_agenda_clamed.png" > <br> <sub> Diagrama Entidade Relacionamento (ER) do projeto Agenda de Contatos </sub>
+   <img src="https://github.com/DEVin-Clamed/modulo2-semana11/blob/main/src/main/resources/doc/er_api_agenda_clamed.png" > <br> 
+   <sub>(Atualizar diagrama) Diagrama Entidade Relacionamento (ER) do projeto Agenda de Contatos </sub>
 
 - Spring Boot:
     - criação do pojeto utilizando o repositório central do maven,
