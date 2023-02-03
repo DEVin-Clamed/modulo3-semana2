@@ -22,7 +22,7 @@ public class UsuarioService implements UserDetailsService {
     public Usuario salvar(Usuario usuario) {
 
         // setamos a senha criptografada para salvar banco de dados
-        usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
 
@@ -38,7 +38,7 @@ public class UsuarioService implements UserDetailsService {
     }
 
 
-    public List<Usuario> getUsersByName(String nome) {
+    public List<Usuario> findUsersByName(String nome) {
         return usuarioRepository.findUsersByName(nome);
     }
 

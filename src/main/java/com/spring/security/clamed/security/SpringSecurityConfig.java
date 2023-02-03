@@ -37,6 +37,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Permite todos os acessos
                 .permitAll()
 
+                // permite que usuarios com a role CADASTRADOR possam inserir, atualizar e obter
+                .antMatchers(HttpMethod.POST,"/usuarios/**").hasRole("CADASTRADOR")
+                .antMatchers(HttpMethod.PUT,"/usuarios/**").hasRole("CADASTRADOR")
+                .antMatchers(HttpMethod.GET,"/usuarios/**").hasRole("CADASTRADOR")
+
+
+
                 .antMatchers("/usuarios/**").hasRole("ADMINISTRADOR")
                 //.antMatchers("/usuarios/**").hasRole("CADASTRADOR")
 
