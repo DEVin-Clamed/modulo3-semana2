@@ -20,6 +20,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UsuarioService usuarioService;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -33,18 +34,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 2 - Passando só o método GET, POST, PUT, DELETE
                 3 - Passando o método HTTP e a URL
                 */
-                .antMatchers(HttpMethod.GET, "/usuarios/**")
+                .antMatchers(HttpMethod.GET, "/usuarios")
                 //Permite todos os acessos
                 .permitAll()
 
                 // permite que usuarios com a role CADASTRADOR possam inserir, atualizar e obter
-                .antMatchers(HttpMethod.POST,"/usuarios/**").hasRole("CADASTRADOR")
-                .antMatchers(HttpMethod.PUT,"/usuarios/**").hasRole("CADASTRADOR")
-                .antMatchers(HttpMethod.GET,"/usuarios/**").hasRole("CADASTRADOR")
+                //.antMatchers(HttpMethod.POST,"/usuarios/**").hasRole("CADASTRADOR")
+                //.antMatchers(HttpMethod.PUT,"/usuarios/**").hasRole("CADASTRADOR")
+                //.antMatchers(HttpMethod.GET,"/usuarios/**").hasRole("CADASTRADOR")
 
 
 
                 .antMatchers("/usuarios/**").hasRole("ADMINISTRADOR")
+
+                //.antMatchers(HttpMethod.GET,"/usuarios/").hasRole("ADMINISTRADOR")
+
                 //.antMatchers("/usuarios/**").hasRole("CADASTRADOR")
 
                 // De qualquer requisição

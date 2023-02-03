@@ -37,6 +37,13 @@ public class UsuarioController {
         return new ResponseEntity<String>("Usuário deletado com sucesso.",HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/{idUsuario}")
+    public ResponseEntity<String> deletePathVariable(@PathVariable(value = "idUsuario") Long idUsuario){
+
+        usuarioService.delete(idUsuario);
+        return new ResponseEntity<String>("Usuário deletado com sucesso.",HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "/")
     public ResponseEntity<List<Usuario>> getUsersByName(@RequestParam (name = "nome") String nome){
