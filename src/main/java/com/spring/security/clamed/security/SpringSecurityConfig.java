@@ -33,11 +33,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 2 - Passando só o método GET, POST, PUT, DELETE
                 3 - Passando o método HTTP e a URL
                 */
-                .antMatchers(HttpMethod.GET, "/usuarios")
+                .antMatchers(HttpMethod.GET, "/usuarios/**")
                 //Permite todos os acessos
                 .permitAll()
 
                 .antMatchers("/usuarios/**").hasRole("ADMINISTRADOR")
+                //.antMatchers("/usuarios/**").hasRole("CADASTRADOR")
 
                 // De qualquer requisição
                 .anyRequest()
@@ -52,8 +53,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                  é dispensável. */
                 .csrf().disable()
 
-                /* Definimos que não iremos criar sessão para armazenar os dados do usuário
-                 */
+                // Definimos que não iremos criar sessão para armazenar os dados do usuário
+
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
