@@ -43,7 +43,7 @@ public class JwtTokenAutenticacaoService{
                 .signWith(SignatureAlgorithm.HS512, SECRET).compact(); // compacta o token usando o algoritmo de criptografia
 
 
-        String token = TOKEN_PREFIX + " " + JWT; //Bearer asdfkjadskfasdfasdfkasjdçfljasdkfgçjlsaçlkjasdf
+        String token = TOKEN_PREFIX + " " + JWT; //Bearer asdfkjadsk.fasdfasdfkasjdçfljasd.kfgçjlsaçlkjasdf
 
         // adicionar no header http
         response.getWriter().write("{\"Authorization\": \""+token+"\"}");
@@ -58,6 +58,7 @@ public class JwtTokenAutenticacaoService{
         String token = request.getHeader(HEADER_STRING);
 
         if(token != null){
+
             String user = Jwts.parser().setSigningKey(SECRET) // Bearer asdfasdfasdfasdfasdfasdfasd
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, "")) // asdfasdfasdfasdfasdfasdfasd
                     .getBody().getSubject(); //brunomoura

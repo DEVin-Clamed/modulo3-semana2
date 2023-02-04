@@ -38,13 +38,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Permite todos os acessos
                 .permitAll()
 
+
                 // permite que usuarios com a role CADASTRADOR possam inserir, atualizar e obter
-                //.antMatchers(HttpMethod.POST,"/usuarios/**").hasRole("CADASTRADOR")
-                //.antMatchers(HttpMethod.PUT,"/usuarios/**").hasRole("CADASTRADOR")
-                //.antMatchers(HttpMethod.GET,"/usuarios/**").hasRole("CADASTRADOR")
+                .antMatchers(HttpMethod.POST,"/usuarios/**").hasRole("CADASTRADOR")
+                .antMatchers(HttpMethod.PUT,"/usuarios/**").hasRole("CADASTRADOR")
+                .antMatchers(HttpMethod.GET,"/usuarios/**").hasRole("CADASTRADOR")
 
 
-
+                // permite o acesso a todos os recursos de /usuarios/** para o perfil ADMISTRADOR
                 .antMatchers("/usuarios/**").hasRole("ADMINISTRADOR")
 
                 //.antMatchers(HttpMethod.GET,"/usuarios/").hasRole("ADMINISTRADOR")
@@ -65,7 +66,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 // Definimos que não iremos criar sessão para armazenar os dados do usuário
-
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()

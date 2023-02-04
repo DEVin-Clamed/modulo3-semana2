@@ -1,7 +1,10 @@
 package com.spring.security.clamed.controllers;
 
+import com.spring.security.clamed.dto.UsuarioInput;
 import com.spring.security.clamed.model.Usuario;
+import com.spring.security.clamed.repository.UsuarioRepository;
 import com.spring.security.clamed.service.UsuarioService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/usuarios")
-public class UsuarioController {
+public class UsuarioController  {
 
 
     @Autowired
@@ -19,8 +22,8 @@ public class UsuarioController {
 
 
     @PostMapping
-    public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario){
-
+    public ResponseEntity<Usuario> cadastrar(@RequestBody UsuarioInput usuarioInput){
+        Usuario usuario = toModel(usuarioInput);
         return new ResponseEntity<Usuario>(usuarioService.salvar(usuario), HttpStatus.CREATED);
     }
 
@@ -59,6 +62,16 @@ public class UsuarioController {
 
         return new ResponseEntity<List<Usuario>>(usuarioService.getUsers(), HttpStatus.OK);
     }
+
+    // método para fazer a conversão de DTO de entrada (UsuarioInput) para Model (Usuario)
+    private Usuario toModel(UsuarioInput usuarioInput){
+        Usuario usuario = new Usuario();
+        BeanUtils.copyProperties(usuarioInput, usuario);
+        return usuario;
+
+    }
+
+    // método para fazer a conversão de DTO de entrada
 
 
 

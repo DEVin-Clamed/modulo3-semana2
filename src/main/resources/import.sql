@@ -10,4 +10,5 @@ INSERT INTO public.usuario(login, nome, senha) VALUES ('danielamartins', 'Daniel
 
 -- Insert na tabela de usuarios_role (associa o(s) usuário(s) com suas permissões)
 INSERT INTO public.usuarios_role(usuario_id, role_id) VALUES (1, 1);
+INSERT INTO public.usuarios_role(usuario_id, role_id) VALUES (1, 2);
 INSERT INTO public.usuarios_role(usuario_id, role_id) VALUES (2, 2);
