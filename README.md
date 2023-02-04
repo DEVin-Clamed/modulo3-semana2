@@ -10,10 +10,12 @@ Nesta semana foram abordados os tópicos sobre Spring Security:
 3. Json Web Token (JWT)
 
 Para colocar em prática os tópicos de aula o projeto desenvolvido contempla a implentação de uma RESTfull API que simula
-uma agenda de contatos integrando a mesma um módulo para gerenciamento de recursos
-de usuários.
+um módulo para gerenciamento de recursos de usuários com controle de acessos baseado em perfis de acesso.
 
-Tópicos abordados em aulas anteriores foram revisados e exercitados ao longo do desenvolvimento do projeto, que são ele:
+Para rodar a aplicação crie a base de dados com PostgreSQL e realize o ajuste da configuração no arquivo application.propierties
+refletindo as configurações de URL, Base de Dados, Login, Senha da sua realidade. 
+
+Tópicos abordados de aulas anteriores foram revisados e exercitados ao longo do desenvolvimento do projeto, que são ele:
 
 - Banco de dados:
     - elaboração do modelo lógico relacional do domínio do projeto
@@ -41,8 +43,7 @@ Tópicos abordados em aulas anteriores foram revisados e exercitados ao longo do
         - GET: obteção de recursos,
         - PUT: atualização de recursos,
         - DELETE: deletar recursos.
-- Debug:
-    - conhecendo as ferramentas de debug na Intellij IDEA
+
 </p>
 
 

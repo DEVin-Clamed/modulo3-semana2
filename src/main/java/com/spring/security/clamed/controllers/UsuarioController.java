@@ -1,6 +1,7 @@
 package com.spring.security.clamed.controllers;
 
 import com.spring.security.clamed.dto.UsuarioInput;
+import com.spring.security.clamed.dto.UsuarioOutput;
 import com.spring.security.clamed.model.Usuario;
 import com.spring.security.clamed.repository.UsuarioRepository;
 import com.spring.security.clamed.service.UsuarioService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -22,15 +24,18 @@ public class UsuarioController  {
 
 
     @PostMapping
-    public ResponseEntity<Usuario> cadastrar(@RequestBody UsuarioInput usuarioInput){
+    public ResponseEntity<UsuarioOutput> cadastrar(@RequestBody UsuarioInput usuarioInput){
         Usuario usuario = toModel(usuarioInput);
-        return new ResponseEntity<Usuario>(usuarioService.salvar(usuario), HttpStatus.CREATED);
+        UsuarioOutput usuarioOutput = toObjectOutPut(usuarioService.salvar(usuario));
+        return new ResponseEntity<UsuarioOutput>(usuarioOutput, HttpStatus.CREATED);
     }
 
 
     @PutMapping
-    public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario){
-        return new ResponseEntity<Usuario>(usuarioService.salvar(usuario), HttpStatus.OK);
+    public ResponseEntity<UsuarioOutput> atualizar(@RequestBody UsuarioInput usuarioInput){
+        Usuario usuario = toModel(usuarioInput);
+        UsuarioOutput usuarioOutput = toObjectOutPut(usuarioService.salvar(usuario));
+        return new ResponseEntity<UsuarioOutput>(usuarioOutput, HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -49,18 +54,23 @@ public class UsuarioController  {
 
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<Usuario>> getUsersByName(@RequestParam (name = "nome") String nome){
+    public ResponseEntity<List<UsuarioOutput>> getUsersByName(@RequestParam (name = "nome") String nome){
 
         // obtem a lista de usuários model
         List<Usuario> usuarios = usuarioService.findUsersByName(nome);
-
-        return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+        // converte lista de Usuario para lista de UsuarioOutput
+        List<UsuarioOutput> usuariosOutput = toCollectionDTOOutput(usuarios);
+        return new ResponseEntity<List<UsuarioOutput>>(usuariosOutput, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> getUsuarios(){
+    public ResponseEntity<List<UsuarioOutput>> getUsuarios(){
+       // obtem a lista de usuarios cadastrados
+        List<Usuario> usuarios = usuarioService.getUsers();
+       // converte lista de Usuario para lista de UsuarioOutput
+       List<UsuarioOutput> usuariosOutput = toCollectionDTOOutput(usuarios);
 
-        return new ResponseEntity<List<Usuario>>(usuarioService.getUsers(), HttpStatus.OK);
+        return new ResponseEntity<List<UsuarioOutput>>(usuariosOutput, HttpStatus.OK);
     }
 
     // método para fazer a conversão de DTO de entrada (UsuarioInput) para Model (Usuario)
@@ -71,8 +81,19 @@ public class UsuarioController  {
 
     }
 
-    // método para fazer a conversão de DTO de entrada
+    // método para fazer a conversão de Model para DTO de saída (UsuarioOutput)
+    private UsuarioOutput toObjectOutPut(Usuario usuario){
+        UsuarioOutput usuarioOutput = new UsuarioOutput();
+        BeanUtils.copyProperties(usuario, usuarioOutput);
+        return usuarioOutput;
+    }
 
+    // método para converter uma lista de Usuarios (List<Usuario>) para uma lista de DTO de saída (List<UsuarioOutput>)
+    private List<UsuarioOutput> toCollectionDTOOutput(List<Usuario> usuarios){
+        return usuarios.stream()
+                .map(usuario -> toObjectOutPut(usuario))
+                .collect(Collectors.toList());
+    }
 
 
 }
