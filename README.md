@@ -15,7 +15,7 @@ um módulo para gerenciamento de recursos de usuários com controle de acessos b
 Para rodar a aplicação crie a base de dados com PostgreSQL e realize o ajuste da configuração no arquivo application.propierties
 refletindo as configurações de URL, Base de Dados, Login, Senha da sua realidade. 
 
-Tópicos abordados de aulas anteriores foram revisados e exercitados ao longo do desenvolvimento do projeto, que são ele:
+Tópicos abordados em aulas anteriores foram revisados e exercitados ao longo do desenvolvimento do projeto, que são ele:
 
 - Banco de dados:
     - elaboração do modelo lógico relacional do domínio do projeto
