@@ -20,8 +20,8 @@ Tópicos abordados de aulas anteriores foram revisados e exercitados ao longo do
 - Banco de dados:
     - elaboração do modelo lógico relacional do domínio do projeto
 
-   <img src="https://github.com/DEVin-Clamed/modulo3-semana2/blob/main/src/main/resources/doc/er_spring_security_clamed.png" height="200" width="200"> <br> 
-   <sub>Diagrama Entidade Relacionamento (ER) do projeto Spring Security </sub>
+   <img src="https://github.com/DEVin-Clamed/modulo3-semana2/blob/main/src/main/resources/doc/er_spring_security_clamed.png"> <br> 
+   Diagrama Entidade Relacionamento (ER) do projeto Spring Security
 
 - Spring Boot:
     - criação do pojeto utilizando o repositório central do maven,
